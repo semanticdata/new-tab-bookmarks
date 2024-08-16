@@ -106,4 +106,5 @@ ul {
 footer {
   text-align: right;
   margin-block-start: 1rem;
+  color: var(--text-color);
 }

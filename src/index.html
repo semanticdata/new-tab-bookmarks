@@ -4,26 +4,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>New Tab Bookmarks</title>
-  <link rel="icon" type="image/svg" sizes="48x48" href="icon.svg" />
-  <link rel="stylesheet" href="style.css" />
-  <script src="options.js"></script>
-  <script src="utils.js"></script>
-  <script src="render.js"></script>
-  <script src="script.js"></script>
+  <link rel="icon" type="image/svg" href="./icon.svg" />
+  <link rel="stylesheet" href="./styles.css" />
+
+  <script type="text/javascript" src="./scripts/options.js"></script>
+  <script type="text/javascript" src="./scripts/render.js"></script>
+  <script type="text/javascript" src="./scripts/script.js"></script>
+  <script type="text/javascript" src="./scripts/tabnotes.js"></script>
+  <script type="text/javascript" src="./scripts/utils.js"></script>
 </head>
 
 <body>
   <header>
-    <h1 id="welcome">new tab bookmarks</h1>
+    <div id="date"></div>
+    <h1 id="welcome">New Tab Bookmarks</h1>
+    <div id="clock"></div>
   </header>
 
   <main>
-    <div id="container">
-      <p>This is a paragraph.</p>
+    <div id="bookmarks">
+      <p>This is a placeholder paragraph.</p>
     </div>
     <div id="note">
-      <textarea class="textarea" id="notes" rows="" placeholder="Write something..."></textarea>
+      <textarea class="textarea" id="notes" placeholder="Write something..."></textarea>
     </div>
   </main>
 
@@ -34,8 +39,6 @@
       by <a href="https://github.com/semanticdata">Miguel Pimentel</a>.
     </p>
   </footer>
-
-  <script type="text/javascript" src="tabnotes.js"></script>
 </body>
 
 </html>

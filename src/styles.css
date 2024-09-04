@@ -88,6 +88,11 @@ main {
   padding-inline: 1rem;
 }
 
+#bookmarks.is-collapsed {
+  overflow-y: auto;
+  height: 5rem;
+}
+
 #note {
   display: flex;
   flex: 1;

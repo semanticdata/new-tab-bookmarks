@@ -20,9 +20,11 @@ const options = {
 document.addEventListener("DOMContentLoaded", function () {
   const settingsButton = document.getElementById("settings-button");
   const settingsSection = document.getElementById("settings");
+  const bookmarksSection = document.getElementById("bookmarks");
 
   settingsButton.addEventListener("click", function () {
     settingsSection.classList.toggle("is-visible");
+    bookmarksSection.classList.toggle("is-collapsed");
     settingsButton.textContent = settingsSection.classList.contains("is-visible")
       ? "Hide Settings"
       : "Settings";

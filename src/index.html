@@ -9,10 +9,10 @@
   <link rel="icon" type="image/svg" href="./icon.svg" />
   <link rel="stylesheet" href="./styles.css" />
 
-  <script type="text/javascript" src="./scripts/options.js"></script>
   <script type="text/javascript" src="./scripts/render.js"></script>
   <script type="text/javascript" src="./scripts/script.js"></script>
   <script type="text/javascript" src="./scripts/tabnotes.js"></script>
+  <script type="text/javascript" src="./scripts/options.js"></script>
   <script type="text/javascript" src="./scripts/utils.js"></script>
 </head>
 
@@ -24,15 +24,26 @@
   </header>
 
   <main>
-    <div id="bookmarks">
-      <p>This is a placeholder paragraph.</p>
-    </div>
-    <div id="note">
+    <section id="bookmarks">
+      <p>This is a placeholder paragraph for the Bookmarks section.</p>
+    </section>
+    <section id="note">
       <textarea class="textarea" id="notes" placeholder="Write something..."></textarea>
-    </div>
+    </section>
+    <section id="settings" class="is-visible">
+      <h2>Settings</h2>
+      <p>This is a placeholder paragraph for the Settings section.</p>
+
+      <label for="color-picker">Choose Title Color:</label>
+      <input type="color" id="color-picker" value="#c2c6ff">
+      <button id="apply-color">Apply Color</button>
+
+      <!-- <button id="save-button">Save</button> -->
+    </section>
   </main>
 
   <footer>
+    <button id="settings-button">Settings</button>
     <p>
       Made with
       <a class="heart" href="https://github.com/semanticdata/firefox-new-tab-notes">❤</a>

@@ -1,39 +1,55 @@
 const render = (columns) => {
-  const colors = options.COLOR_THEME;
+  const { COLOR_THEME: colors, TITLE } = options;
   const root = document.getElementById("bookmarks");
 
-  let colorIndex = 0;
-  root.innerHTML = "";
+  root.innerHTML = ""; // Clear the root content once
 
-  columns.forEach((column) => {
+  const fragment = document.createDocumentFragment(); // Use a fragment for batch DOM insertion
+
+  columns.forEach((column, colorIndex) => {
     if (!column.children.length) return;
 
-    const listItems = column.children
-      .map((bookmark) => {
+    const columnDiv = document.createElement("div");
+    columnDiv.classList.add("column");
+
+    const folderName = document.createElement("h2");
+    folderName.classList.add(
+      `folder-name`,
+      `color-${colorIndex % colors.length}`
+    );
+    folderName.textContent = column.title;
+    columnDiv.appendChild(folderName);
+
+    const ul = document.createElement("ul");
+
+    column.children.forEach((bookmark) => {
+      const li = document.createElement("li");
+
+      if (bookmark.isSeparator) {
+        li.classList.add("separator");
+        li.innerHTML = "&nbsp;";
+      } else {
+        const a = document.createElement("a");
         const title = trunc(
           bookmark.path.slice(1).concat(bookmark.title).join("/")
         );
 
-        if (bookmark.isSeparator) {
-          return '<li class="separator">&nbsp;</li>';
+        a.href = bookmark.url;
+        a.textContent = title;
+
+        if (title.endsWith("…")) {
+          a.title = bookmark.title;
         }
+        li.appendChild(a);
+      }
 
-        const titleAttribute = title.endsWith("…")
-          ? ` title="${bookmark.title}"`
-          : "";
-        return `<li><a href="${bookmark.url}"${titleAttribute}>${title}</a></li>`;
-      })
-      .join("");
+      ul.appendChild(li);
+    });
 
-    colorIndex = (colorIndex + 1) % colors.length;
-    const columnHtml = `
-        <div class="column">
-          <h2 class="folder-name color-${colorIndex}">${column.title}</h2>
-          <ul>${listItems}</ul>
-        </div>`;
-
-    root.innerHTML += columnHtml;
+    columnDiv.appendChild(ul);
+    fragment.appendChild(columnDiv);
   });
 
-  document.getElementById("welcome").textContent = options.TITLE;
+  root.appendChild(fragment);
+  document.getElementById("welcome").textContent = TITLE;
 };

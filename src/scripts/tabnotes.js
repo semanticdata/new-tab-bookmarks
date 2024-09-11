@@ -1,64 +1,48 @@
 // NOTE TEXTAREA COMPONENT
-var timeoutId;
-const notes = document.getElementById("notes");
-document.addEventListener("keyup", logKey);
 
-const browser_type = getBrowser();
-if (browser_type === "Chrome") {
-  var browser_obj = chrome;
-} else {
-  var browser_obj = browser;
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const notes = document.getElementById("notes");
+  let timeoutId;
+  const browserType = getBrowser();
+  const browserObj = browserType === "Chrome" ? chrome : browser;
 
-browser_obj.tabs.onActivated.addListener(tabOpen);
-browser_obj.windows.onFocusChanged.addListener(tabOpen);
+  document.addEventListener("keyup", () => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(saveToDB, 100); // Increased delay to 100ms for performance
+  });
 
-function logKey(e) {
-  clearTimeout(timeoutId);
-  timeoutId = setTimeout(function () {
-    saveToDB();
-  }, 10);
-}
+  browserObj.tabs.onActivated.addListener(tabOpen);
+  browserObj.windows.onFocusChanged.addListener(tabOpen);
 
-function getBrowser() {
-  if (typeof chrome !== "undefined") {
-    if (typeof browser !== "undefined") {
-      return "Firefox";
-    } else {
-      return "Chrome";
+  function getBrowser() {
+    if (typeof chrome !== "undefined") {
+      return typeof browser !== "undefined" ? "Firefox" : "Chrome";
     }
-  } else {
     return "Edge";
   }
-}
 
-function saveToDB() {
-  data = {
-    tab_note: document.querySelector("#notes").value,
-  };
-  if (browser_type === "Chrome") {
-    chrome.storage.sync.set(data, function () {});
-  } else {
-    browser_obj.storage.sync.set(data);
+  function saveToDB() {
+    const data = { tab_note: notes.value };
+    if (browserType === "Chrome") {
+      chrome.storage.sync.set(data);
+    } else {
+      browserObj.storage.sync.set(data);
+    }
   }
-}
 
-function tabOpen(tab) {
-  if (browser_type === "Chrome") {
-    chrome.storage.sync.get(["tab_note"], function (result) {
-      if (typeof result.tab_note !== "undefined") {
-        document.querySelector("#notes").value = result.tab_note;
-      }
-    });
-  } else {
-    browser_obj.storage.sync.get(["tab_note"]).then((result) => {
-      if (typeof result.tab_note !== "undefined") {
-        document.querySelector("#notes").value = result.tab_note;
+  function tabOpen() {
+    const getTabNote =
+      browserType === "Chrome"
+        ? chrome.storage.sync.get
+        : browserObj.storage.sync.get;
+
+    getTabNote(["tab_note"]).then((result) => {
+      if (result.tab_note !== undefined) {
+        notes.value = result.tab_note;
       }
     });
   }
-}
 
-window.addEventListener("load", () => {
+  // Call tabOpen on load to initialize the textarea with stored value
   tabOpen();
 });

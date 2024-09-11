@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   setInterval(updateTime, 1000);
-  updateTime(); // Initialize clock and date immediately
+  updateTime();
 
   // DATE COMPONENT
   function updateDate() {
@@ -29,6 +29,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateDate();
 });
-
-
-

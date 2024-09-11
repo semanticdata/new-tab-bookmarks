@@ -10,7 +10,7 @@ chrome.bookmarks.getTree((items) => {
     return;
   }
 
-  const rootColumn = { title: '/', children: [] };
+  const rootColumn = { title: "/", children: [] };
   bookmarksBar.children.forEach((node) => {
     if (node.children) {
       const column = { title: node.title, children: [] };
@@ -38,29 +38,29 @@ const visit = (column, node, path = []) => {
 };
 
 const addBookmark = (column, node, path = []) => {
-  if (!node.url || node.url.startsWith('javascript:')) {
+  if (!node.url || node.url.startsWith("javascript:")) {
     // Ignore bookmarklets
     return;
   }
 
   const isSeparator =
-    options.SEPARATORS.includes(node.title) || node.type === 'separator';
+    options.SEPARATORS.includes(node.title) || node.type === "separator";
 
   column.children.push({
     title: node.title,
     url: node.url,
     path: path,
-    isSeparator
+    isSeparator,
   });
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('welcome').style.color = options.TITLE_COLOR;
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("welcome").style.color = options.TITLE_COLOR;
 });
 
 if (window.browser) {
   window.browser.runtime.getBrowserInfo().then((browser) => {
-    if (browser.name === 'Firefox') {
+    if (browser.name === "Firefox") {
       console.log(
         `New Tab Bookmarks. On ${browser.name}, you can make this your home page by setting the following URL in your home page preferences:`
       );

@@ -1,7 +1,7 @@
 const options = {
   TITLE: "New Tab Bookmarks",
   ROOT_FOLDER: /(bookmarks (tool)?bar|favou?rites bar)/i,
-  TITLE_COLOR: "#c2c6ff", // Default color
+  TITLE_COLOR: "#c2c6ff",
   // BACKGROUND: '#1e1e2e',
   SEPARATORS: ["-", ""],
   COLOR_THEME: [
@@ -25,13 +25,15 @@ document.addEventListener("DOMContentLoaded", function () {
   settingsButton.addEventListener("click", function () {
     settingsSection.classList.toggle("is-visible");
     bookmarksSection.classList.toggle("is-collapsed");
-    settingsButton.textContent = settingsSection.classList.contains("is-visible")
+    settingsButton.textContent = settingsSection.classList.contains(
+      "is-visible"
+    )
       ? "Hide Settings"
       : "Settings";
   });
-});
+  // });
 
-document.addEventListener("DOMContentLoaded", function () {
+  // document.addEventListener("DOMContentLoaded", function () {
   const headerTitle = document.getElementById("welcome");
   const colorPicker = document.getElementById("color-picker");
   const applyColorButton = document.getElementById("apply-color");

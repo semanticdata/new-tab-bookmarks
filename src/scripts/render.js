@@ -30,8 +30,11 @@ const render = (columns) => {
         li.innerHTML = "&nbsp;";
       } else {
         const a = document.createElement("a");
+        // const title = trunc(bookmark.path.slice(1).concat(bookmark.title).join("/"));
+        // Using template literal for title
         const title = trunc(
-          bookmark.path.slice(1).concat(bookmark.title).join("/")
+          // `${bookmark.path.slice(1).join("/")}/${bookmark.title}`
+          `${bookmark.path.slice(1).join("/")}${bookmark.title}`
         );
 
         a.href = bookmark.url;

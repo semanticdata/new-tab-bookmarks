@@ -276,3 +276,7 @@ button.settings-button:hover {
   display: inline-flex;
   flex-direction: column;
 }
+
+.hidden {
+  display: none;
+}

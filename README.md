@@ -17,6 +17,10 @@ Firefox extension that transforms the New Tab into a simple, clean bookmarks pag
 - ✅ Displays current date.
 - ✅ Displays current time.
 
+## 🖼️ Screenshot
+
+![screenshot](/screenshot.png)
+
 ## 💜 Acknowledgments
 
 This extension was originally based on [hello, friend](https://github.com/jaywick/hello-friend). Since the initial release, many changes and additions have been made to the extension. This includes new text editor, clock, and date components.

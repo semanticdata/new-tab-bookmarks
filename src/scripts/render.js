@@ -1,37 +1,58 @@
 const render = (columns) => {
-    const colors = options.COLOR_THEME;
-    const root = document.getElementById('bookmarks');
+  const { COLOR_THEME: colors, TITLE } = options;
+  const root = document.getElementById("bookmarks");
 
-    let colorIndex = 0;
-    root.innerHTML = '';
+  root.innerHTML = ""; // Clear the root content once
 
-    columns.forEach((column) => {
-        if (!column.children.length) return;
+  const fragment = document.createDocumentFragment(); // Use a fragment for batch DOM insertion
 
-        const listItems = column.children
-            .map((bookmark) => {
-                const title = trunc(
-                    bookmark.path.slice(1).concat(bookmark.title).join('/')
-                );
+  columns.forEach((column, colorIndex) => {
+    if (!column.children.length) return;
 
-                if (bookmark.isSeparator) {
-                    return '<li class="separator">&nbsp;</li>';
-                }
+    const columnDiv = document.createElement("div");
+    columnDiv.classList.add("column");
 
-                const titleAttribute = title.endsWith('…') ? ` title="${bookmark.title}"` : '';
-                return `<li><a href="${bookmark.url}"${titleAttribute}>${title}</a></li>`;
-            })
-            .join('');
+    const folderName = document.createElement("h2");
+    folderName.classList.add(
+      `folder-name`,
+      `color-${colorIndex % colors.length}`
+    );
+    folderName.textContent = column.title;
+    columnDiv.appendChild(folderName);
 
-        colorIndex = (colorIndex + 1) % colors.length;
-        const columnHtml = `
-        <div class="column">
-          <h2 class="folder-name color-${colorIndex}">${column.title}</h2>
-          <ul>${listItems}</ul>
-        </div>`;
+    const ul = document.createElement("ul");
 
-        root.innerHTML += columnHtml;
+    column.children.forEach((bookmark) => {
+      const li = document.createElement("li");
+
+      if (bookmark.isSeparator) {
+        li.classList.add("separator");
+        li.innerHTML = "&nbsp;";
+      } else {
+        const a = document.createElement("a");
+        // const title = trunc(bookmark.path.slice(1).concat(bookmark.title).join("/"));
+        // Using template literal for title
+        const title = trunc(
+          // `${bookmark.path.slice(1).join("/")}/${bookmark.title}`
+          `${bookmark.path.slice(1).join("/")}${bookmark.title}`
+        );
+
+        a.href = bookmark.url;
+        a.textContent = title;
+
+        if (title.endsWith("…")) {
+          a.title = bookmark.title;
+        }
+        li.appendChild(a);
+      }
+
+      ul.appendChild(li);
     });
 
-    document.getElementById('welcome').textContent = options.TITLE;
+    columnDiv.appendChild(ul);
+    fragment.appendChild(columnDiv);
+  });
+
+  root.appendChild(fragment);
+  document.getElementById("welcome").textContent = TITLE;
 };

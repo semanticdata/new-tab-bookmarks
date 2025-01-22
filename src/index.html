@@ -30,20 +30,19 @@
     <section id="note">
       <textarea class="textarea" id="notes" placeholder="Write something..."></textarea>
     </section>
-    <section id="settings">
+    <section id="settings" aria-label="Settings Panel">
       <h2>Settings</h2>
-      <p>This is a placeholder paragraph for the Settings section.</p>
-      <br>
       <div class="settings-section">
-        <label class="settings-label" for="color-picker">Title Color:</label>
+        <label class="settings-label" for="color-picker">Title Color</label>
         <input class="settings-input" type="color" id="color-picker" value="#c2c6ff">
-        <button class="settings-button" id="reset-color">Reset</button>
-        <button class="settings-button" id="apply-color">Apply Color</button>
+        <button class="settings-button" id="reset-color" aria-label="Reset color to default">Reset</button>
+        <button class="settings-button" id="apply-color" aria-label="Apply selected color">Apply Color</button>
       </div>
       <div class="settings-section" style="display:none;">
         <label class="settings-label" for="color-picker-ph">Duplicate Setting:</label>
-        <input class="settings-input" type="color" id="color-picker-ph" value="#c2c6ff">
-        <button class="settings-button" id="apply-color-ph">Apply Color</button>
+        <input class="settings-input" type="color" id="color-picker-ph" value="#c2c6ff"
+          aria-labelledby="color-picker-label">
+        <button class="settings-button" id="apply-color-ph" aria-label="Apply selected color">Apply Color</button>
       </div>
     </section>
   </main>

@@ -208,9 +208,9 @@ ul {
 /* Settings panel styling */
 #settings {
   position: absolute;
-  right: -320px;
+  right: -370px;
   top: 0;
-  width: 300px;
+  width: 350px;
   border-radius: 0.5rem;
   transition: all 0.4s ease-in-out;
   background: var(--note-background);
@@ -246,14 +246,14 @@ ul {
   gap: 1rem;
 }
 
-.settings-label {
+/* .settings-label {
   display: block;
   margin-bottom: 0.5rem;
-}
+} */
 
 #color-picker,
 .settings-input {
-  width: 100%;
+  /* width: 100%; */
   margin-bottom: 0.5rem;
   background: var(--note-background);
   color: var(--text-color);
@@ -304,4 +304,9 @@ button.settings-button:hover {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.1);
   outline: 2px solid gray;
+}
+
+.settings-input-group {
+  display: flex;
+  gap: 0.5rem;
 }

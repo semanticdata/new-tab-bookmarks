@@ -57,14 +57,3 @@ const addBookmark = (column, node, path = []) => {
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('welcome').style.color = options.TITLE_COLOR;
 });
-
-if (window.browser) {
-  window.browser.runtime.getBrowserInfo().then((browser) => {
-    if (browser.name === 'Firefox') {
-      console.log(
-        `New Tab Bookmarks. On ${browser.name}, you can make this your home page by setting the following URL in your home page preferences:`
-      );
-      console.log(window.location.href);
-    }
-  });
-}

@@ -1,4 +1,4 @@
-<h1><img src="src/icon.svg" width="28px" /> New Tab Boomarks</h1>
+<h1><img src="src/icons/icon48.png" width="28px" /> New Tab Boomarks</h1>
 
 ![Mozilla Add-on](https://img.shields.io/amo/v/newtab-bookmarks@semanticdata)
 ![Add-on rating](https://img.shields.io/amo/rating/newtab-bookmarks@semanticdata)

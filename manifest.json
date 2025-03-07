@@ -8,7 +8,8 @@
     "storage"
   ],
   "icons": {
-    "48": "src/icon.svg"
+    "48": "src/icons/icon48.png",
+    "96": "src/icons/icon96.png"
   },
   "browser_specific_settings": {
     "gecko": {

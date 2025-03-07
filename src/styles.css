@@ -52,8 +52,12 @@ header {
 }
 
 #welcome {
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: 600;
+  background: var(--note-background);
+  border: 1px solid gray;
+  border-radius: 0.3rem;
+  padding: 0.25rem 1rem;
 }
 
 #date,
@@ -288,6 +292,7 @@ button.settings-button:hover {
   border-radius: 0.3rem;
   transition: all 0.2s ease;
 }
+
 /* Color picker styling */
 #bg-color-picker,
 #note-bg-color-picker,

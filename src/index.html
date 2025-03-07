@@ -24,36 +24,40 @@
   </header>
 
   <main>
-    <section id="bookmarks">
-      <p>This is a placeholder paragraph for the Bookmarks section.</p>
-    </section>
-    <section id="note">
-      <textarea class="textarea" id="notes" placeholder="Write something..."></textarea>
-    </section>
+    <div id="bookmarks-notes-container">
+      <section id="bookmarks">
+        <p>This is a placeholder paragraph for the Bookmarks section.</p>
+      </section>
+      <section id="note">
+        <textarea class="textarea" id="notes" placeholder="Write something..."></textarea>
+      </section>
+    </div>
     <section id="settings" aria-label="Settings Panel">
       <h2>Settings</h2>
       <div class="settings-section">
         <label class="settings-label" for="color-picker">Title Color</label>
         <input class="settings-input" type="color" id="color-picker" value="#c2c6ff">
-        <button class="settings-button" id="reset-color" aria-label="Reset color to default">Reset</button>
-        <button class="settings-button" id="apply-color" aria-label="Apply selected color">Apply Color</button>
+        <div class="settings-buttons">
+          <button class="settings-button" id="reset-color" aria-label="Reset color to default">Reset</button>
+          <button class="settings-button" id="apply-color" aria-label="Apply selected color">Apply</button>
+        </div>
       </div>
-      <div class="settings-section" style="display:none;">
-        <label class="settings-label" for="color-picker-ph">Duplicate Setting:</label>
-        <input class="settings-input" type="color" id="color-picker-ph" value="#c2c6ff"
-          aria-labelledby="color-picker-label">
-        <button class="settings-button" id="apply-color-ph" aria-label="Apply selected color">Apply Color</button>
-      </div>
+      <!-- <div class="settings-section">
+        <label class="settings-label" for="font-size">Font Size</label>
+        <input class="settings-input" type="number" id="font-size" min="10" max="40" value="16">
+        <div class="settings-buttons">
+        </div>
+      </div> -->
     </section>
   </main>
 
   <footer>
-    <button id="settings-button">Settings</button>
     <p>
       Made with
       <a class="heart" href="https://github.com/semanticdata/firefox-new-tab-notes">❤</a>
       by <a href="https://github.com/semanticdata">Miguel Pimentel</a>.
     </p>
+    <button id="settings-button">Settings</button>
   </footer>
 </body>
 

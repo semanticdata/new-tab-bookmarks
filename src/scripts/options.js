@@ -21,7 +21,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const settingsButton = document.getElementById("settings-button");
   const settingsSection = document.getElementById("settings");
   const bookmarksSection = document.getElementById("bookmarks");
-
+  
+  // Color picker elements
+  const colorPicker = document.getElementById('color-picker');
+  const applyColorButton = document.getElementById('apply-color');
+  const resetColorButton = document.getElementById('reset-color');
+  const welcomeElement = document.getElementById('welcome');
+  
+  // Settings button click handler
   settingsButton.addEventListener("click", function () {
     settingsSection.classList.toggle("is-visible");
     bookmarksSection.classList.toggle("is-collapsed");
@@ -29,55 +36,24 @@ document.addEventListener("DOMContentLoaded", function () {
       ? "Hide Settings"
       : "Settings";
   });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
-  const headerTitle = document.getElementById("welcome");
-  const colorPicker = document.getElementById("color-picker");
-  const applyColorButton = document.getElementById("apply-color");
-  const resetColorButton = document.getElementById("reset-color");
-
-  // Load settings from localStorage
-  function loadSettings() {
-    const savedColor = localStorage.getItem("titleColor");
-    if (savedColor) {
-      options.TITLE_COLOR = savedColor;
-      headerTitle.style.color = savedColor;
-      colorPicker.value = savedColor;
-    } else {
-      // Set default color if no saved color is found
-      headerTitle.style.color = options.TITLE_COLOR;
-      colorPicker.value = options.TITLE_COLOR;
-    }
-  }
-
-  // Save settings to localStorage
-  function saveSettings(color) {
-    localStorage.setItem("titleColor", color);
-  }
-
-  // Reset color to default
-  function resetColor() {
-    const defaultColor = "#c2c6ff"; // Directly use the default color
-    headerTitle.style.color = defaultColor;
-    colorPicker.value = defaultColor;
-    options.TITLE_COLOR = defaultColor; // Update the options object
-    localStorage.removeItem("titleColor"); // Remove the saved color
-  }
-
-  // Apply color change
-  applyColorButton.addEventListener("click", () => {
+  // Load saved color or use default
+  const savedColor = localStorage.getItem('titleColor') || '#c2c6ff';
+  colorPicker.value = savedColor;
+  welcomeElement.style.color = savedColor;
+  
+  // Apply color button
+  applyColorButton.addEventListener('click', function() {
     const selectedColor = colorPicker.value;
-    headerTitle.style.color = selectedColor;
-    options.TITLE_COLOR = selectedColor; // Update options object
-    saveSettings(selectedColor); // Save the color to localStorage
+    welcomeElement.style.color = selectedColor;
+    localStorage.setItem('titleColor', selectedColor);
   });
-
-  // Reset color to default when reset button is clicked
-  resetColorButton.addEventListener("click", () => {
-    resetColor(); // Call the reset function
+  
+  // Reset color button
+  resetColorButton.addEventListener('click', function() {
+    const defaultColor = '#c2c6ff';
+    colorPicker.value = defaultColor;
+    welcomeElement.style.color = defaultColor;
+    localStorage.setItem('titleColor', defaultColor);
   });
-
-  // Load settings on page load
-  loadSettings();
 });

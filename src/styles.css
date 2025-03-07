@@ -288,3 +288,20 @@ button.settings-button:hover {
   border-radius: 0.3rem;
   transition: all 0.2s ease;
 }
+/* Color picker styling */
+#bg-color-picker,
+#note-bg-color-picker,
+#title-color-picker {
+  background: var(--note-background);
+  color: var(--text-color);
+  border: 1px solid gray;
+  border-radius: 0.3rem;
+  transition: all 0.2s ease;
+}
+
+#bg-color-picker:focus,
+#note-bg-color-picker:focus,
+#title-color-picker:focus {
+  outline: 2px solid var(--custom-color-4);
+  border-color: transparent;
+}

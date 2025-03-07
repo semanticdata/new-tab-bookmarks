@@ -4,12 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <title>New Tab Bookmarks</title>
   <link rel="icon" type="image/png" href="./icons/icon48.png" />
   <link rel="stylesheet" href="./fonts.css" />
   <link rel="stylesheet" href="./styles.css" />
-
   <script type="text/javascript" src="./scripts/render.js"></script>
   <script type="text/javascript" src="./scripts/script.js"></script>
   <script type="text/javascript" src="./scripts/tabnotes.js"></script>
@@ -35,21 +33,37 @@
     </div>
     <section id="settings" aria-label="Settings Panel">
       <h2>Settings</h2>
-
       <div class="settings-section">
         <label class="settings-section-label" for="color-picker">Colors</label>
         <div class="settings-input-group">
-          <label class="settings-label" for="color-picker">Title Color</label>
-          <input class="" type="color" id="color-picker" value="#c2c6ff">
+          <label class="settings-label" for="bg-color-picker">Background</label>
+          <input type="color" id="bg-color-picker" value="#1e1e2e">
         </div>
         <div class="settings-buttons">
-          <button class="settings-button" id="reset-color" aria-label="Reset color to default">Reset</button>
-          <button class="settings-button" id="apply-color" aria-label="Apply selected color">Apply</button>
+          <button class="settings-button" id="reset-bg-color" aria-label="Reset color to default">Reset</button>
+          <button class="settings-button" id="apply-bg-color" aria-label="Apply selected color">Apply</button>
+        </div>
+        <div class="settings-input-group">
+          <label class="settings-label" for="note-bg-color-picker">Note Background</label>
+          <input type="color" id="note-bg-color-picker" value="#1a1b27">
+        </div>
+        <div class="settings-buttons">
+          <button class="settings-button" id="reset-note-bg-color" aria-label="Reset color to default">Reset</button>
+          <button class="settings-button" id="apply-note-bg-color" aria-label="Apply selected color">Apply</button>
+        </div>
+
+        <div class="settings-input-group">
+          <label class="settings-label" for="title-color-picker">Title</label>
+          <input type="color" id="title-color-picker" value="#c2c6ff">
+        </div>
+        <div class="settings-buttons">
+          <button class="settings-button" id="reset-title-color" aria-label="Reset color to default">Reset</button>
+          <button class="settings-button" id="apply-title-color" aria-label="Apply selected color">Apply</button>
         </div>
       </div>
 
       <div class="settings-section">
-        <label class="settings-section-label" for="font-size">Font Size</label>
+        <label class="settings-section-label" for="font-size">Font Sizes</label>
         <div class="settings-input-group">
           <label class="settings-label" for="font-size">Bookmarks</label>
           <input class="settings-input" type="number" id="font-size" min="10" max="40" value="16">
@@ -70,7 +84,6 @@
             aria-label="Apply selected notes font size">Apply</button>
         </div>
       </div>
-
     </section>
   </main>
 

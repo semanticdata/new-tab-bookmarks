@@ -3,34 +3,56 @@ const render = (columns) => {
     const root = document.getElementById('bookmarks');
 
     let colorIndex = 0;
-    root.innerHTML = '';
+    // Clear the root element safely
+    while (root.firstChild) {
+        root.removeChild(root.firstChild);
+    }
 
     columns.forEach((column) => {
         if (!column.children.length) return;
 
-        const listItems = column.children
-            .map((bookmark) => {
+        colorIndex = (colorIndex + 1) % colors.length;
+
+        // Create DOM elements instead of using innerHTML
+        const columnDiv = document.createElement('div');
+        columnDiv.className = 'column';
+
+        const heading = document.createElement('h2');
+        heading.className = `folder-name color-${colorIndex}`;
+        heading.textContent = column.title;
+
+        const ul = document.createElement('ul');
+
+        // Create list items using DOM methods instead of innerHTML
+        column.children.forEach((bookmark) => {
+            const li = document.createElement('li');
+
+            if (bookmark.isSeparator) {
+                li.className = 'separator';
+                li.innerHTML = '&nbsp;'; // This is safe as it's a fixed string
+            } else {
+                const a = document.createElement('a');
+                a.href = bookmark.url;
+
                 const title = trunc(
                     bookmark.path.slice(1).concat(bookmark.title).join('/')
                 );
 
-                if (bookmark.isSeparator) {
-                    return '<li class="separator">&nbsp;</li>';
+                a.textContent = title;
+
+                if (title.endsWith('…')) {
+                    a.title = bookmark.title;
                 }
 
-                const titleAttribute = title.endsWith('…') ? ` title="${bookmark.title}"` : '';
-                return `<li><a href="${bookmark.url}"${titleAttribute}>${title}</a></li>`;
-            })
-            .join('');
+                li.appendChild(a);
+            }
 
-        colorIndex = (colorIndex + 1) % colors.length;
-        const columnHtml = `
-        <div class="column">
-          <h2 class="folder-name color-${colorIndex}">${column.title}</h2>
-          <ul>${listItems}</ul>
-        </div>`;
+            ul.appendChild(li);
+        });
 
-        root.innerHTML += columnHtml;
+        columnDiv.appendChild(heading);
+        columnDiv.appendChild(ul);
+        root.appendChild(columnDiv);
     });
 
     document.getElementById('welcome').textContent = options.TITLE;

@@ -17,9 +17,10 @@ Firefox extension that transforms the New Tab into a simple, clean bookmarks pag
 - ✅ Displays current date.
 - ✅ Displays current time.
 
-## 🖼️ Screenshot
+## 🖼️ Screenshots
 
-![screenshot](/screenshot.png)
+| ![screenshot](/screenshot.png) | ![screenshot](/screenshot-settings.png) |
+| :---: | :---: |
 
 ## 💜 Acknowledgments
 

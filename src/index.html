@@ -7,6 +7,7 @@
 
   <title>New Tab Bookmarks</title>
   <link rel="icon" type="image/png" href="./icons/icon48.png" />
+  <link rel="stylesheet" href="./fonts.css" />
   <link rel="stylesheet" href="./styles.css" />
 
   <script type="text/javascript" src="./scripts/render.js"></script>
@@ -34,14 +35,19 @@
     </div>
     <section id="settings" aria-label="Settings Panel">
       <h2>Settings</h2>
+
       <div class="settings-section">
-        <label class="settings-label" for="color-picker">Title Color</label>
-        <input class="settings-input" type="color" id="color-picker" value="#c2c6ff">
+        <label class="settings-section-label" for="color-picker">Colors</label>
+        <div class="settings-input-group">
+          <label class="settings-label" for="color-picker">Title Color</label>
+          <input class="" type="color" id="color-picker" value="#c2c6ff">
+        </div>
         <div class="settings-buttons">
           <button class="settings-button" id="reset-color" aria-label="Reset color to default">Reset</button>
           <button class="settings-button" id="apply-color" aria-label="Apply selected color">Apply</button>
         </div>
       </div>
+
       <div class="settings-section">
         <label class="settings-section-label" for="font-size">Font Size</label>
         <div class="settings-input-group">
@@ -52,10 +58,11 @@
           <button class="settings-button" id="reset-font" aria-label="Reset font size to default">Reset</button>
           <button class="settings-button" id="apply-font" aria-label="Apply selected font size">Apply</button>
         </div>
-        <!-- </div> -->
-        <!-- <div class="settings-section"> -->
-        <label class="settings-label" for="notes-font-size">Notes</label>
-        <input class="settings-input" type="number" id="notes-font-size" min="10" max="40" value="16">
+
+        <div class="settings-input-group">
+          <label class="settings-label" for="notes-font-size">Notes</label>
+          <input class="settings-input" type="number" id="notes-font-size" min="10" max="40" value="16">
+        </div>
         <div class="settings-buttons">
           <button class="settings-button" id="reset-notes-font"
             aria-label="Reset notes font size to default">Reset</button>
@@ -63,6 +70,7 @@
             aria-label="Apply selected notes font size">Apply</button>
         </div>
       </div>
+
     </section>
   </main>
 

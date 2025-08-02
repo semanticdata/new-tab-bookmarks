@@ -1,8 +1,11 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "New Tab Bookmarks",
   "version": "1.4.0",
   "description": "New tab filled with your own bookmarks and a place to write notes.",
+  "chrome_url_overrides": {
+    "newtab": "src/newtab.html"
+  },
   "background": {
     "scripts": [
       "src/scripts/background.js"
@@ -20,10 +23,7 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "newtab-bookmarks@semanticdata",
-      "strict_min_version": "100.0"
+      "strict_min_version": "140.0"
     }
-  },
-  "chrome_url_overrides": {
-    "newtab": "src/index.html"
   }
 }

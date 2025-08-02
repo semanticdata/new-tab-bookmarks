@@ -7,21 +7,25 @@
   <title>New Tab Bookmarks</title>
   <meta name="description" content="A customizable new tab page for Firefox with bookmarks and notes." />
   <meta name="theme-color" content="#1e1e2e" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self';" />
+  <link rel="preconnect" href="chrome-extension:" crossorigin>
+  <link rel="preload" href="./fonts/MonaspaceNeon-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" type="image/png" href="./icons/icon48.png" />
   <link rel="stylesheet" href="./fonts.css" />
   <link rel="stylesheet" href="./styles.css" />
-  <script type="text/javascript" src="./scripts/utils.js"></script>
-  <script type="text/javascript" src="./scripts/render.js"></script>
-  <script type="text/javascript" src="./scripts/script.js"></script>
-  <script type="text/javascript" src="./scripts/tabnotes.js"></script>
-  <script type="text/javascript" src="./scripts/options.js"></script>
+  <script src="./scripts/utils.js"></script>
+  <script src="./scripts/render.js"></script>
+  <script src="./scripts/script.js"></script>
+  <script src="./scripts/tabnotes.js"></script>
+  <script src="./scripts/options.js"></script>
 </head>
 
 <body>
   <header>
-    <div id="date"></div>
+    <time id="date" datetime=""></time>
     <h1 id="welcome">New Tab Bookmarks</h1>
-    <div id="clock"></div>
+    <time id="clock" datetime=""></time>
   </header>
 
   <main>
@@ -33,10 +37,10 @@
         <textarea class="textarea" id="notes" placeholder="Write something..."></textarea>
       </section>
     </div>
-    <section id="settings" aria-label="Settings Panel">
+    <section id="settings" aria-label="Settings Panel" role="dialog" aria-hidden="true">
       <h2>Settings</h2>
       <div class="settings-section">
-        <label class="settings-section-label" for="color-picker">Colors</label>
+        <label class="settings-section-label" for="bg-color-picker">Colors</label>
         <div class="settings-input-group">
           <label class="settings-label" for="bg-color-picker">Background</label>
           <input type="color" id="bg-color-picker" value="#1e1e2e">
@@ -95,7 +99,7 @@
       <a class="heart" href="https://github.com/semanticdata/firefox-new-tab-notes">❤</a>
       by <a href="https://github.com/semanticdata">Miguel Pimentel</a>.
     </p>
-    <button id="settings-button">Settings</button>
+    <button id="settings-button" aria-controls="settings" aria-expanded="false">Settings</button>
   </footer>
 </body>
 

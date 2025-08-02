@@ -1,11 +1,15 @@
+/* ===== CSS CUSTOM PROPERTIES ===== */
 :root {
+  /* Background Colors */
   --body-background: #1e1e2e;
   --note-background: #1a1b27;
 
+  /* Text Colors */
   --title-color: #c2c6ff;
   --text-color: #fff;
   --link-color: #c5c8c6;
 
+  /* Theme Colors */
   --custom-color-1: #ea51b2;
   --custom-color-2: #00f769;
   --custom-color-3: #ebff87;
@@ -13,9 +17,20 @@
   --custom-color-5: #b45bcf;
   --custom-color-6: #a1efe4;
 
-  --font-family: "Monaspace-Neon", monospace, sans-serif;
+  /* Typography */
+  --font-family: "Monaspace-Neon", "Consolas", "Monaco", "Courier New", monospace, sans-serif;
+
+  /* Spacing */
+  --border-radius: 0.3rem;
+  --border-width: 1px;
+  --border-color: gray;
+  --padding-sm: 0.5rem;
+  --padding-md: 1rem;
+  --gap-sm: 0.5rem;
+  --gap-md: 1rem;
 }
 
+/* ===== GLOBAL STYLES ===== */
 * {
   box-sizing: border-box;
 }
@@ -25,17 +40,18 @@ html {
 }
 
 body {
-  background: var(--body-background);
-  color: var(--text-color);
-  font-family: var(--font-family);
+  background: var(--body-background, #1e1e2e);
+  color: var(--text-color, #fff);
+  font-family: var(--font-family, "Consolas", monospace, sans-serif);
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   height: 100%;
-  padding-inline: 1rem;
+  padding-inline: var(--padding-md, 1rem);
   overflow: hidden;
 }
 
+/* ===== LAYOUT COMPONENTS ===== */
 main {
   display: flex;
   flex-direction: row;
@@ -51,22 +67,23 @@ header {
   justify-content: space-between;
 }
 
+/* ===== HEADER ELEMENTS ===== */
 #welcome {
   font-size: 24px;
   font-weight: 600;
-  background: var(--note-background);
-  border: 1px solid gray;
-  border-radius: 0.3rem;
-  padding: 0.25rem 1rem;
+  background: var(--note-background, #1a1b27);
+  border: var(--border-width, 1px) solid var(--border-color, gray);
+  border-radius: var(--border-radius, 0.3rem);
+  padding: 0.25rem var(--padding-md, 1rem);
 }
 
 #date,
 #clock {
-  background: var(--note-background);
-  color: var(--text-color);
-  border: 1px solid gray;
-  border-radius: 0.3rem;
-  padding: 0.5rem 1rem;
+  background: var(--note-background, #1a1b27);
+  color: var(--text-color, #fff);
+  border: var(--border-width, 1px) solid var(--border-color, gray);
+  border-radius: var(--border-radius, 0.3rem);
+  padding: var(--padding-sm, 0.5rem) var(--padding-md, 1rem);
 }
 
 #date {
@@ -79,6 +96,7 @@ header {
   min-height: 2rem;
 }
 
+/* ===== MAIN CONTENT AREAS ===== */
 #bookmarks-notes-container {
   display: flex;
   flex-direction: column;
@@ -90,12 +108,12 @@ header {
 
 #bookmarks {
   display: flex;
-  border: 1px solid gray;
-  border-radius: 0.3rem;
+  border: var(--border-width, 1px) solid var(--border-color, gray);
+  border-radius: var(--border-radius, 0.3rem);
   justify-content: center;
-  grid-gap: 1rem;
-  background: var(--note-background);
-  padding-inline: 1rem;
+  gap: var(--gap-md, 1rem);
+  background: var(--note-background, #1a1b27);
+  padding-inline: var(--padding-md, 1rem);
   overflow-y: auto;
   flex: 1;
   min-height: 0;
@@ -104,23 +122,24 @@ header {
 #note {
   display: flex;
   flex: 1;
-  margin-top: 1rem;
+  margin-top: var(--gap-md, 1rem);
 }
 
 textarea {
-  border-width: 1px;
-  border-radius: 0.3rem;
-  padding: 1rem;
+  border-width: var(--border-width, 1px);
+  border-radius: var(--border-radius, 0.3rem);
+  padding: var(--padding-md, 1rem);
   width: 100%;
-  background: var(--note-background);
-  color: var(--text-color);
-  border: 1px solid gray;
+  background: var(--note-background, #1a1b27);
+  color: var(--text-color, #fff);
+  border: var(--border-width, 1px) solid var(--border-color, gray);
 }
 
+/* ===== FOOTER AND LINKS ===== */
 footer {
   text-align: right;
-  margin-block: 1rem;
-  color: var(--text-color);
+  margin-block: var(--gap-md, 1rem);
+  color: var(--text-color, #fff);
   transition: all 0.3s ease;
   display: flex;
   justify-content: space-between;
@@ -134,54 +153,56 @@ footer .heart:hover {
 
 a {
   text-decoration: none;
-  color: var(--link-color);
+  color: var(--link-color, #c5c8c6);
 }
 
 a:hover {
-  color: var(--text-color);
+  color: var(--text-color, #fff);
   text-decoration: underline;
 }
 
+/* ===== LIST STYLES ===== */
 ul {
   list-style: none;
   padding: 0;
 }
 
+/* ===== BOOKMARK COLUMN COLORS ===== */
 .column:nth-of-type(1) .folder-name {
-  color: var(--custom-color-1);
+  color: var(--custom-color-1, #ea51b2);
 }
 
 .column:nth-of-type(2) .folder-name {
-  color: var(--custom-color-2);
+  color: var(--custom-color-2, #00f769);
 }
 
 .column:nth-of-type(3) .folder-name {
-  color: var(--custom-color-3);
+  color: var(--custom-color-3, #ebff87);
 }
 
 .column:nth-of-type(4) .folder-name {
-  color: var(--custom-color-4);
+  color: var(--custom-color-4, #62d6e8);
 }
 
 .column:nth-of-type(5) .folder-name {
-  color: var(--custom-color-5);
+  color: var(--custom-color-5, #b45bcf);
 }
 
 .column:nth-of-type(6) .folder-name {
-  color: var(--custom-color-6);
+  color: var(--custom-color-6, #a1efe4);
 }
 
-/* Settings panel styling */
+/* ===== SETTINGS PANEL ===== */
 #settings {
   position: absolute;
   right: -370px;
   top: 0;
   width: 350px;
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius, 0.3rem);
   transition: all 0.4s ease-in-out;
-  background: var(--note-background);
-  border: 1px solid gray;
-  padding: 1rem;
+  background: var(--note-background, #1a1b27);
+  border: var(--border-width, 1px) solid var(--border-color, gray);
+  padding: var(--padding-md, 1rem);
   height: 100%;
   overflow-y: auto;
   z-index: 10;
@@ -193,27 +214,27 @@ ul {
 }
 
 #settings h2 {
-  margin: 0 0 1rem 0;
-  color: var(--title-color);
-  border-bottom: 1px solid gray;
+  margin: 0 0 var(--gap-md, 1rem) 0;
+  color: var(--title-color, #c2c6ff);
+  border-bottom: var(--border-width, 1px) solid var(--border-color, gray);
 }
 
 .settings-section {
-  background: var(--body-background);
-  color: var(--text-color);
-  border: 1px solid gray;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  margin-bottom: 1rem;
+  background: var(--body-background, #1e1e2e);
+  color: var(--text-color, #fff);
+  border: var(--border-width, 1px) solid var(--border-color, gray);
+  border-radius: var(--border-radius, 0.3rem);
+  padding: var(--padding-md, 1rem);
+  margin-bottom: var(--gap-md, 1rem);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--gap-md, 1rem);
 }
 
 .settings-section-label {
   font-weight: 600;
-  color: var(--title-color);
-  border-bottom: 1px solid gray;
+  color: var(--title-color, #c2c6ff);
+  border-bottom: var(--border-width, 1px) solid var(--border-color, gray);
 }
 
 .settings-label {
@@ -224,11 +245,11 @@ ul {
 
 .settings-input {
   display: inline-block;
-  background: var(--note-background);
-  color: var(--text-color);
-  border: 1px solid gray;
-  border-radius: 0.3rem;
-  padding: 0.5rem;
+  background: var(--note-background, #1a1b27);
+  color: var(--text-color, #fff);
+  border: var(--border-width, 1px) solid var(--border-color, gray);
+  border-radius: var(--border-radius, 0.3rem);
+  padding: var(--padding-sm, 0.5rem);
   transition: all 0.2s ease;
 }
 
@@ -238,27 +259,29 @@ ul {
   justify-content: space-between;
 }
 
+/* ===== FORM INTERACTIONS ===== */
 .settings-input:focus,
 #color-picker:focus {
-  outline: 2px solid var(--custom-color-4);
+  outline: 2px solid var(--custom-color-4, #62d6e8);
   border-color: transparent;
 }
 
 .settings-buttons {
   display: flex;
-  gap: 0.5rem;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  gap: var(--gap-sm, 0.5rem);
+  border-bottom: var(--border-width, 1px) solid rgba(128, 128, 128, 0.3);
 }
 
+/* ===== BUTTON STYLES ===== */
 #apply-color,
 button.settings-button {
   flex: 1;
   margin: 0;
-  background: var(--note-background);
-  color: var(--text-color);
-  border: 1px solid gray;
-  border-radius: 0.3rem;
-  padding: 0.5rem 1rem;
+  background: var(--note-background, #1a1b27);
+  color: var(--text-color, #fff);
+  border: var(--border-width, 1px) solid var(--border-color, gray);
+  border-radius: var(--border-radius, 0.3rem);
+  padding: var(--padding-sm, 0.5rem) var(--padding-md, 1rem);
   transition: all 0.2s ease;
 }
 
@@ -266,15 +289,15 @@ button.settings-button {
 button.settings-button:hover {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.1);
-  outline: 2px solid gray;
+  outline: 2px solid var(--border-color, gray);
 }
 
 #settings-button {
-  background: var(--note-background);
-  color: var(--text-color);
-  border: 1px solid gray;
-  border-radius: 0.3rem;
-  padding: 0.5rem 1rem;
+  background: var(--note-background, #1a1b27);
+  color: var(--text-color, #fff);
+  border: var(--border-width, 1px) solid var(--border-color, gray);
+  border-radius: var(--border-radius, 0.3rem);
+  padding: var(--padding-sm, 0.5rem) var(--padding-md, 1rem);
   height: 2.5rem;
   transition: all 0.2s ease;
 }
@@ -282,31 +305,35 @@ button.settings-button:hover {
 #settings-button:hover {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.1);
-  outline: 2px solid gray;
+  outline: 2px solid var(--border-color, gray);
 }
 
 #color-picker {
-  background: var(--note-background);
-  color: var(--text-color);
-  border: 1px solid gray;
-  border-radius: 0.3rem;
+  background: var(--note-background, #1a1b27);
+  color: var(--text-color, #fff);
+  border: var(--border-width, 1px) solid var(--border-color, gray);
+  border-radius: var(--border-radius, 0.3rem);
   transition: all 0.2s ease;
 }
 
-/* Color picker styling */
+/* ===== FORM ELEMENTS ===== */
+
+/* Universal color picker styling */
+.color-picker,
 #bg-color-picker,
 #note-bg-color-picker,
 #title-color-picker {
-  background: var(--note-background);
-  color: var(--text-color);
-  border: 1px solid gray;
-  border-radius: 0.3rem;
+  background: var(--note-background, #1a1b27);
+  color: var(--text-color, #fff);
+  border: var(--border-width, 1px) solid var(--border-color, gray);
+  border-radius: var(--border-radius, 0.3rem);
   transition: all 0.2s ease;
 }
 
+.color-picker:focus,
 #bg-color-picker:focus,
 #note-bg-color-picker:focus,
 #title-color-picker:focus {
-  outline: 2px solid var(--custom-color-4);
+  outline: 2px solid var(--custom-color-4, #62d6e8);
   border-color: transparent;
 }

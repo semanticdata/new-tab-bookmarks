@@ -1,45 +1,73 @@
+// BOOKMARKS PROCESSING - Main script for fetching and organizing bookmarks
+const { api: browserAPI } = getBrowserInfo();
+
 // Array to store bookmark columns for rendering
 const columns = [];
 
-// Fetch the bookmark tree from Chrome's bookmarks API
-chrome.bookmarks.getTree((items) => {
-  // Find the bookmarks bar folder that matches the ROOT_FOLDER regex
-  const bookmarksBar = items[0].children.find((x) =>
-    options.ROOT_FOLDER.test(x.title)
-  );
+/**
+ * Initializes the bookmark processing and rendering
+ */
+const initializeBookmarks = () => {
+  try {
+    // Fetch the bookmark tree from browser's bookmarks API
+    if (browserAPI.bookmarks && browserAPI.bookmarks.getTree) {
+      browserAPI.bookmarks.getTree((items) => {
+        try {
+          // Find the bookmarks bar folder that matches the ROOT_FOLDER regex
+          const bookmarksBar = items[0].children.find((x) =>
+            options.ROOT_FOLDER.test(x.title)
+          );
 
-  // Exit if the root folder isn't found
-  if (!bookmarksBar) {
-    console.error(`Expected a folder called '${options.ROOT_FOLDER}'`);
-    return;
-  }
+          // Exit if the root folder isn't found
+          if (!bookmarksBar) {
+            console.error(`Expected a folder called '${options.ROOT_FOLDER}'`);
+            return;
+          }
 
-  // Create a root column for bookmarks not in folders
-  const rootColumn = { title: '/', children: [] };
+          // Create a root column for bookmarks not in folders
+          const rootColumn = { title: '/', children: [] };
 
-  // Process each child of the bookmarks bar
-  bookmarksBar.children.forEach((node) => {
-    if (node.children) {
-      // If the node is a folder, create a new column
-      const column = { title: node.title, children: [] };
-      visit(column, node);
-      columns.push(column);
+          // Process each child of the bookmarks bar
+          bookmarksBar.children.forEach((node) => {
+            if (node.children) {
+              // If the node is a folder, create a new column
+              const column = { title: node.title, children: [] };
+              visit(column, node);
+              columns.push(column);
+            } else {
+              // If the node is a bookmark, add it to the root column
+              addBookmark(rootColumn, node);
+            }
+          });
+
+          // Only add the root column if it has children
+          if (rootColumn.children.length > 0) {
+            columns.push(rootColumn);
+          }
+
+          // Render the columns to the page
+          render(columns);
+        } catch (error) {
+          console.error('Error processing bookmarks:', error);
+        }
+      });
     } else {
-      // If the node is a bookmark, add it to the root column
-      addBookmark(rootColumn, node);
+      console.error('Bookmarks API not available');
     }
-  });
-
-  // Only add the root column if it has children
-  if (rootColumn.children.length > 0) {
-    columns.push(rootColumn);
+  } catch (error) {
+    console.error('Error fetching bookmark tree:', error);
   }
+};
 
-  // Render the columns to the page
-  render(columns);
-});
+// Initialize bookmarks when called
+initializeBookmarks();
 
-// Recursive function to visit bookmark nodes and their children
+/**
+ * Recursively processes bookmark nodes and their children
+ * @param {Object} column - The column object to add bookmarks to
+ * @param {Object} node - The bookmark node to process
+ * @param {string[]} path - The hierarchical path to the current node
+ */
 const visit = (column, node, path = []) => {
   if (!node.children) {
     // If the node is a bookmark (not a folder), add it to the column
@@ -51,10 +79,15 @@ const visit = (column, node, path = []) => {
   node.children.forEach((child) => visit(column, child, [...path, node.title]));
 };
 
-// Function to add a bookmark to a column
+/**
+ * Adds a bookmark to a column with proper filtering and formatting
+ * @param {Object} column - The column object to add the bookmark to
+ * @param {Object} node - The bookmark node to add
+ * @param {string[]} path - The hierarchical path to the bookmark
+ */
 const addBookmark = (column, node, path = []) => {
   if (!node.url || node.url.startsWith('javascript:')) {
-    // Ignore bookmarklets and items without URLs
+    // Ignore bookmarklets and items without URLs for security
     return;
   }
 

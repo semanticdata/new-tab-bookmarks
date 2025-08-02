@@ -1,59 +1,77 @@
+// RENDER COMPONENT - Handles the display of bookmark columns in the DOM
+
+/**
+ * Renders bookmark columns to the DOM with color themes and proper structure
+ * @param {Array} columns - Array of column objects containing bookmarks
+ */
 const render = (columns) => {
-    const colors = options.COLOR_THEME;
-    const root = document.getElementById('bookmarks');
+    try {
+        const colors = options.COLOR_THEME;
+        const root = document.getElementById('bookmarks');
 
-    let colorIndex = 0;
-    // Clear the root element safely
-    while (root.firstChild) {
-        root.removeChild(root.firstChild);
-    }
+        if (!root) {
+            console.error('Bookmarks container element not found');
+            return;
+        }
 
-    columns.forEach((column) => {
-        if (!column.children.length) return;
+        let colorIndex = 0;
+        // Clear the root element safely
+        while (root.firstChild) {
+            root.removeChild(root.firstChild);
+        }
 
-        colorIndex = (colorIndex + 1) % colors.length;
+        columns.forEach((column) => {
+            if (!column.children.length) return;
 
-        // Create DOM elements instead of using innerHTML
-        const columnDiv = document.createElement('div');
-        columnDiv.className = 'column';
+            colorIndex = (colorIndex + 1) % colors.length;
 
-        const heading = document.createElement('h2');
-        heading.className = `folder-name color-${colorIndex}`;
-        heading.textContent = column.title;
+            // Create DOM elements instead of using innerHTML
+            const columnDiv = document.createElement('div');
+            columnDiv.className = 'column';
 
-        const ul = document.createElement('ul');
+            const heading = document.createElement('h2');
+            heading.className = `folder-name color-${colorIndex}`;
+            heading.textContent = column.title;
 
-        // Create list items using DOM methods instead of innerHTML
-        column.children.forEach((bookmark) => {
-            const li = document.createElement('li');
+            const ul = document.createElement('ul');
 
-            if (bookmark.isSeparator) {
-                li.className = 'separator';
-                li.innerHTML = '&nbsp;'; // This is safe as it's a fixed string
-            } else {
-                const a = document.createElement('a');
-                a.href = bookmark.url;
+            // Create list items using DOM methods instead of innerHTML
+            column.children.forEach((bookmark) => {
+                const li = document.createElement('li');
 
-                const title = trunc(
-                    bookmark.path.slice(1).concat(bookmark.title).join('/')
-                );
+                if (bookmark.isSeparator) {
+                    li.className = 'separator';
+                    li.innerHTML = '&nbsp;'; // This is safe as it's a fixed string
+                } else {
+                    const a = document.createElement('a');
+                    a.href = bookmark.url;
 
-                a.textContent = title;
+                    const title = trunc(
+                        bookmark.path.slice(1).concat(bookmark.title).join('/')
+                    );
 
-                if (title.endsWith('…')) {
-                    a.title = bookmark.title;
+                    a.textContent = title;
+
+                    if (title.endsWith('…')) {
+                        a.title = bookmark.title;
+                    }
+
+                    li.appendChild(a);
                 }
 
-                li.appendChild(a);
-            }
+                ul.appendChild(li);
+            });
 
-            ul.appendChild(li);
+            columnDiv.appendChild(heading);
+            columnDiv.appendChild(ul);
+            root.appendChild(columnDiv);
         });
 
-        columnDiv.appendChild(heading);
-        columnDiv.appendChild(ul);
-        root.appendChild(columnDiv);
-    });
-
-    document.getElementById('welcome').textContent = options.TITLE;
+        const welcomeElement = document.getElementById('welcome');
+        if (welcomeElement) {
+            welcomeElement.textContent = options.TITLE;
+        }
+    } catch (error) {
+        console.error('Error rendering bookmarks:', error);
+    }
 };

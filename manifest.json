@@ -3,9 +3,15 @@
   "name": "New Tab Bookmarks",
   "version": "1.4.0",
   "description": "New tab filled with your own bookmarks and a place to write notes.",
+  "background": {
+    "scripts": [
+      "src/scripts/background.js"
+    ]
+  },
   "permissions": [
     "bookmarks",
-    "storage"
+    "storage",
+    "tabs"
   ],
   "icons": {
     "48": "src/icons/icon48.png",
